@@ -12,7 +12,7 @@ router.get('/login', (req, res, next) => {
   if(req.session.loggedIn){
     return res.redirect('/');
   }else{
-    res.render('login',{msg:req.flash('info')});
+    res.render('login',{msg:req.flash('msg')});
     res.set('Cache-control','no-store')
   }
 });
@@ -39,8 +39,7 @@ router.post('/login',(req,res,next)=>{
       req.session.user=response.user
       res.redirect('/')
     }else{
-      console.log(response.message)
-      req.flash('info',response.message)
+      req.flash('msg',response.message)
       res.redirect('/users/login')
     }
   }).catch(err=>{

@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var productRouter = require("./routes/products");
 const connection = require("./config/connection");
 const hbs = require("express-handlebars");
 const session = require('express-session');
@@ -36,6 +37,7 @@ app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAg
 app.use(flash())
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/products",productRouter);
 
 
 // catch 404 and forward to error handler

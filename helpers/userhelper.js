@@ -36,9 +36,9 @@ class User {
        return  await bcryptjs.compare(this.req.password,user.password).then(status=>{
         if(status){
             delete user.password
-            return {status,user,message:"User password is correct"}
+            return {status,user,message:"Password is correct"}
         }else{
-            return {status,message:"User passwrod is wrong"}
+            return {status,message:"Passwrod is wrong"}
         }
         }).catch(err=>{
             return err
@@ -47,9 +47,7 @@ class User {
     
     }
 
-    async logOut(){
-        
-    }
+    
 }
 
 
