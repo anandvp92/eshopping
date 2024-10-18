@@ -1,8 +1,6 @@
 var express = require('express');
 const User = require('../helpers/userhelper');
-
 var router = express.Router();
-
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -14,14 +12,14 @@ router.get('/login', (req, res, next) => {
   if(req.session.loggedIn){
     return res.redirect('/');
   }else{
-    res.render('login', {});
+    res.render('login',{msg:req.flash('info')});
     res.set('Cache-control','no-store')
   }
 });
 
 
 router.get('/signup',(req,res,next)=>{
-  res.render("signup",{});
+  res.render("signup");
 })
 
 router.post('/signup',(req,res,next)=>{
@@ -42,6 +40,7 @@ router.post('/login',(req,res,next)=>{
       res.redirect('/')
     }else{
       console.log(response.message)
+      req.flash('info',response.message)
       res.redirect('/users/login')
     }
   }).catch(err=>{

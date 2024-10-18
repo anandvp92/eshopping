@@ -8,6 +8,7 @@ var usersRouter = require("./routes/users");
 const connection = require("./config/connection");
 const hbs = require("express-handlebars");
 const session = require('express-session');
+const flash = require('express-flash');
 var app = express();
 
 app.engine('hbs',hbs.engine(
@@ -32,8 +33,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAge:600000}}))
+app.use(flash())
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
